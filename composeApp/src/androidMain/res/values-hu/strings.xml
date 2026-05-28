@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">vandR</string>
+    <!-- Értesítési csatorna — megjelenik az Android rendszerbeállításokban → Alkalmazások → Értesítések -->
+    <string name="notification_channel_name">Utazásfrissítések</string>
+    <string name="notification_channel_description">Értesítések az utazásaidban zajló aktivitásról</string>
+</resources>

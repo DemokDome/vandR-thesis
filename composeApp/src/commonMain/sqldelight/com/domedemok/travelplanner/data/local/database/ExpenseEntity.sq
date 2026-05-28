@@ -1,0 +1,38 @@
+-- ExpenseEntity.sq
+-- SQLDelight schema for Expense table (offline cache)
+
+CREATE TABLE ExpenseEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    tripId TEXT NOT NULL,
+    title TEXT NOT NULL,
+    amount REAL NOT NULL,
+    category TEXT NOT NULL,
+    paidBy TEXT NOT NULL,
+    debts TEXT NOT NULL,
+    date INTEGER NOT NULL,
+    FOREIGN KEY (tripId) REFERENCES TripEntity(id) ON DELETE CASCADE
+);
+
+CREATE INDEX expense_trip_index ON ExpenseEntity(tripId);
+
+getAllExpensesForTrip:
+SELECT * FROM ExpenseEntity
+WHERE tripId = ?
+ORDER BY date DESC;
+
+insertExpense:
+INSERT OR REPLACE INTO ExpenseEntity(
+    id,
+    tripId,
+    title,
+    amount,
+    category,
+    paidBy,
+    debts,
+    date
+)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteExpense:
+DELETE FROM ExpenseEntity
+WHERE id = ?;

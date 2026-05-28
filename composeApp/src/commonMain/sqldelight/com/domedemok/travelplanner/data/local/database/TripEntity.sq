@@ -1,0 +1,46 @@
+-- SQLDelight schema for Trip table (offline cache)
+
+CREATE TABLE TripEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    createdBy TEXT NOT NULL,
+    tripMembers TEXT NOT NULL,
+    formerMembers TEXT NOT NULL DEFAULT '{}',
+    startDate INTEGER,
+    endDate INTEGER,
+    createdAt INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL,
+    lastSyncedAt INTEGER NOT NULL
+);
+
+getAllTrips:
+SELECT * FROM TripEntity
+ORDER BY updatedAt DESC;
+
+getTripById:
+SELECT * FROM TripEntity
+WHERE id = ?;
+
+insertTrip:
+INSERT OR REPLACE INTO TripEntity(
+    id,
+    name,
+    description,
+    createdBy,
+    tripMembers,
+    formerMembers,
+    startDate,
+    endDate,
+    createdAt,
+    updatedAt,
+    lastSyncedAt
+)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteTrip:
+DELETE FROM TripEntity
+WHERE id = ?;
+
+clearAllTrips:
+DELETE FROM TripEntity;

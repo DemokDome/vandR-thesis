@@ -1,0 +1,14 @@
+CREATE TABLE SearchStateEntity (
+    userId TEXT NOT NULL,
+    tripId TEXT NOT NULL,
+    locationQuery TEXT NOT NULL,
+    PRIMARY KEY (userId, tripId)
+);
+
+getSearchState:
+SELECT locationQuery FROM SearchStateEntity
+WHERE userId = ? AND tripId = ?;
+
+upsertSearchState:
+INSERT OR REPLACE INTO SearchStateEntity(userId, tripId, locationQuery)
+VALUES (?, ?, ?);

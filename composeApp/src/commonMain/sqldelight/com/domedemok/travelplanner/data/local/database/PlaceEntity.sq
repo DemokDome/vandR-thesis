@@ -1,0 +1,52 @@
+-- PlaceEntity.sq
+-- SQLDelight schema for Place table (offline cache)
+
+CREATE TABLE PlaceEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    tripId TEXT NOT NULL,
+    name TEXT NOT NULL,
+    address TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    category TEXT NOT NULL,
+    foursquareId TEXT NOT NULL,
+    addedAt INTEGER NOT NULL,
+    FOREIGN KEY (tripId) REFERENCES TripEntity(id) ON DELETE CASCADE
+);
+
+CREATE INDEX place_trip_index ON PlaceEntity(tripId);
+
+getAllPlacesForTrip:
+SELECT * FROM PlaceEntity
+WHERE tripId = ?
+ORDER BY addedAt ASC;
+
+getPlaceById:
+SELECT * FROM PlaceEntity
+WHERE id = ?;
+
+insertPlace:
+INSERT OR REPLACE INTO PlaceEntity(
+    id,
+    tripId,
+    name,
+    address,
+    latitude,
+    longitude,
+    category,
+    foursquareId,
+    addedAt
+)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deletePlace:
+DELETE FROM PlaceEntity
+WHERE id = ?;
+
+deletePlacesForTrip:
+DELETE FROM PlaceEntity
+WHERE tripId = ?;
+
+countPlacesForTrip:
+SELECT COUNT(*) FROM PlaceEntity
+WHERE tripId = ?;
