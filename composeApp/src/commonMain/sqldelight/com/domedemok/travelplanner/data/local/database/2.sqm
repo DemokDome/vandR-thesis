@@ -8,8 +8,7 @@ CREATE TABLE ItineraryDayEntity (
     dayNumber INTEGER NOT NULL,
     date      INTEGER NOT NULL,
     placeIds  TEXT    NOT NULL,
-    PRIMARY KEY (tripId, id),
-    FOREIGN KEY (tripId) REFERENCES TripEntity(id) ON DELETE CASCADE
+    PRIMARY KEY (tripId, id)
 );
 
 CREATE INDEX itinerary_trip_index ON ItineraryDayEntity(tripId);
