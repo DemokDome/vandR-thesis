@@ -53,6 +53,6 @@ actual val platformModule: Module = module {
     single<ChatRepository>      { ChatRepositoryImpl(get(), get()) }
     single<AiChatRepository>    { AiChatRepositoryImpl(get(), get()) }
     single<ExpenseRepository>   { ExpenseRepositoryImpl(get()) }
-    single<ItineraryRepository> { ItineraryRepositoryImpl(get()) }
+    single<ItineraryRepository> { ItineraryRepositoryImpl(get(), get()) }
     single<PhotoRepository>     { PhotoRepositoryImpl(get(), get()) }
 }

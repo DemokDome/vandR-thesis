@@ -1,0 +1,46 @@
+-- ItineraryDayEntity.sq
+-- SQLDelight schema for the itinerary day table (offline cache).
+--
+-- Mirrors the Firestore documents under `trips/{tripId}/itinerary/{dayId}`.
+-- The Firestore doc id ("day_1", "day_2", …) is only unique *within* a trip, so
+-- the primary key is the composite (tripId, id) — unlike PlaceEntity, whose
+-- Firestore ids are globally unique.
+--
+-- `placeIds` is the ordered place-id list serialised to a JSON TEXT column
+-- (same approach as TripEntity.tripMembers), since SQLite has no array type.
+
+CREATE TABLE ItineraryDayEntity (
+    tripId    TEXT    NOT NULL,
+    id        TEXT    NOT NULL,
+    dayNumber INTEGER NOT NULL,
+    date      INTEGER NOT NULL,
+    placeIds  TEXT    NOT NULL,
+    PRIMARY KEY (tripId, id),
+    FOREIGN KEY (tripId) REFERENCES TripEntity(id) ON DELETE CASCADE
+);
+
+CREATE INDEX itinerary_trip_index ON ItineraryDayEntity(tripId);
+
+getDaysForTrip:
+SELECT * FROM ItineraryDayEntity
+WHERE tripId = ?
+ORDER BY dayNumber ASC;
+
+insertDay:
+INSERT OR REPLACE INTO ItineraryDayEntity(
+    tripId,
+    id,
+    dayNumber,
+    date,
+    placeIds
+)
+VALUES (?, ?, ?, ?, ?);
+
+updateDayPlaces:
+UPDATE ItineraryDayEntity
+SET placeIds = ?
+WHERE tripId = ? AND id = ?;
+
+deleteDaysForTrip:
+DELETE FROM ItineraryDayEntity
+WHERE tripId = ?;
