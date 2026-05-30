@@ -1,6 +1,6 @@
 <div align="center">
 
-# TravelPlanner
+# vandR
 
 **A cross-platform group travel companion built with Kotlin Multiplatform and Compose Multiplatform.**
 
@@ -16,7 +16,7 @@ Plan trips together — organise places to visit, split expenses fairly, chat wi
 
 ## Overview
 
-TravelPlanner is an end-to-end demonstration of what a modern KMP + Compose Multiplatform application looks like in practice. It was developed as the topic of a BSc thesis at BME (Budapest University of Technology and Economics) and exercises the platform across the layers a serious app needs: shared UI and business logic, real-time multi-user sync, third-party API integration, on-device caching, push notifications, and full localisation — all from a single Kotlin codebase that targets Android and the browser.
+vandR is an end-to-end demonstration of what a modern KMP + Compose Multiplatform application looks like in practice. It was developed as the topic of a BSc thesis at BME (Budapest University of Technology and Economics) and exercises the platform across the layers a serious app needs: shared UI and business logic, real-time multi-user sync, third-party API integration, on-device caching, push notifications, and full localisation — all from a single Kotlin codebase that targets Android and the browser.
 
 The user-facing experience is designed for a concrete scenario: a small group of people planning a trip together. They invite each other via a 6-character join code or QR link, build up a list of places to visit using Foursquare, add and split shared expenses, chat in real time, ask a Gemini-powered assistant for suggestions, and assemble the day-by-day itinerary together.
 
